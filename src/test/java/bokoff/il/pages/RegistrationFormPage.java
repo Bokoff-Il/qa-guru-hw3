@@ -1,9 +1,9 @@
 package bokoff.il.pages;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static java.lang.String.format;
 
 import bokoff.il.data.RegistrationData;
 import bokoff.il.pages.components.CalendarComponent;
@@ -15,15 +15,15 @@ public class RegistrationFormPage {
   SelenideElement firstNameInput=$("#firstName");
   SelenideElement lastNameInput= $("#lastName");
   SelenideElement emailInput = $("#userEmail");
-  SelenideElement userNumberInput=$("#userNumber");
-  SelenideElement dateOfBirthInput=$("#dateOfBirthInput");
-  SelenideElement subjectsInput=$("#subjectsInput");
-  SelenideElement pictureInput=$("#uploadPicture");
-  SelenideElement currentAddressInput=$("#currentAddress");
-  SelenideElement stateInput =$("#state");
-  SelenideElement cityInput =$("#city");
+  SelenideElement userNumberInput = $("#userNumber");
+  SelenideElement dateOfBirthInput = $("#dateOfBirthInput");
+  SelenideElement subjectsInput = $("#subjectsInput");
+  SelenideElement pictureInput = $("#uploadPicture");
+  SelenideElement currentAddressInput = $("#currentAddress");
+  SelenideElement stateInput = $("#state");
+  SelenideElement cityInput = $("#city");
   SelenideElement submitButton = $("#submit");
-  SelenideElement title =$("#example-modal-sizes-title-lg");
+  SelenideElement title = $("#example-modal-sizes-title-lg");
 
   CalendarComponent calendar = new CalendarComponent();
   CheckboxComponent checkBox= new CheckboxComponent();
@@ -40,7 +40,7 @@ public class RegistrationFormPage {
     setEmail(registrationData.email);
     setGender(registrationData.gender);
     setPhoneNumber(registrationData.mobilePhone);
-    setBirthDate("10","January","2000");
+    setBirthDate(registrationData.day,registrationData.month,registrationData.year);
     setSubjects(registrationData.subjects);
     setHobby(registrationData.hobby);
     setPicture(registrationData.filePath);
@@ -118,6 +118,21 @@ public class RegistrationFormPage {
 
   public RegistrationFormPage checkTitle(){
     title.shouldHave(text("Thanks for submitting the form"));
+    return this;
+  }
+
+  public RegistrationFormPage checkFields(RegistrationData registrationData){
+    $(".table-responsive").shouldHave(
+        text(format("%s %s", registrationData.firstName, registrationData.lastName)),
+        text(registrationData.email),
+        text(registrationData.mobilePhone),
+        text(registrationData.gender),
+        text(format("%s %s,%s", registrationData.day, registrationData.month, registrationData.year)),
+        text(registrationData.subjects),
+        text(registrationData.hobby),
+        text(registrationData.fileName),
+        text(registrationData.currentAddress),
+        text(format("%s %s",registrationData.state, registrationData.city)));
     return this;
   }
 }
