@@ -2,6 +2,7 @@ package bokoff.il.pages;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.open;
 import static java.lang.String.format;
 
@@ -31,6 +32,8 @@ public class RegistrationFormPage {
 
   public RegistrationFormPage openPage(){
     open("/automation-practice-form");
+    executeJavaScript("$('footer').remove()");
+    executeJavaScript("$('#fixedban').remove()");
     return this;
   }
 
