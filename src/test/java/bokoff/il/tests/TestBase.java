@@ -1,5 +1,7 @@
 package bokoff.il.tests;
 
+import static com.codeborne.selenide.Selenide.closeWebDriver;
+
 import bokoff.il.config.CredentialsConfig;
 import bokoff.il.helpers.Attach;
 import com.codeborne.selenide.Configuration;
@@ -38,5 +40,6 @@ public class TestBase {
     Attach.pageSource();
     Attach.browserConsoleLogs();
     Attach.addVideo();
+    closeWebDriver();
   }
 }
