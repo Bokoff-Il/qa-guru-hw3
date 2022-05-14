@@ -4,7 +4,6 @@ import static io.qameta.allure.Allure.step;
 
 import bokoff.il.data.RegistrationData;
 import bokoff.il.pages.RegistrationFormPage;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
